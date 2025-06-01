@@ -1,6 +1,6 @@
 from typing import List, Dict
-from src.domain.celestial_body import CelestialBody
-from src.domain.vector2d import Vector2D
+from .celestial_body import CelestialBody
+from .vector2d import Vector2D
 
 class GravitySimulation:
     """
