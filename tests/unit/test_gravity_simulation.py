@@ -1,7 +1,7 @@
 import unittest
-from src.domain.gravity_simulation import GravitySimulation
-from src.domain.celestial_body import CelestialBody
-from src.domain.vector2d import Vector2D
+from src.api.domain.gravity_simulation import GravitySimulation # Updated import path
+from src.api.domain.celestial_body import CelestialBody # Updated import path
+from src.api.domain.vector2d import Vector2D # Updated import path
 import math # For more complex calculations if needed
 
 class TestGravitySimulation(unittest.TestCase):
@@ -15,9 +15,9 @@ class TestGravitySimulation(unittest.TestCase):
         self.simulation.time_step_display = self.time_step
 
         # Define bodies for use in multiple tests
-        self.body_at_origin = CelestialBody(mass=10.0, position=Vector2D(0.0, 0.0), velocity=Vector2D(0.0, 0.0), radius=1.0, color=(0,0,0))
-        self.body_on_x_axis = CelestialBody(mass=20.0, position=Vector2D(10.0, 0.0), velocity=Vector2D(0.0, 0.0), radius=1.0, color=(0,0,0))
-        self.body_in_quadrant1 = CelestialBody(mass=30.0, position=Vector2D(5.0, 5.0), velocity=Vector2D(0.0, 1.0), radius=1.0, color=(0,0,0))
+        self.body_at_origin = CelestialBody(mass=10.0, position=Vector2D(0.0, 0.0), velocity=Vector2D(0.0, 0.0), radius=1.0, color=(0,0,0), id="b_origin")
+        self.body_on_x_axis = CelestialBody(mass=20.0, position=Vector2D(10.0, 0.0), velocity=Vector2D(0.0, 0.0), radius=1.0, color=(0,0,0), id="b_x_axis")
+        self.body_in_quadrant1 = CelestialBody(mass=30.0, position=Vector2D(5.0, 5.0), velocity=Vector2D(0.0, 1.0), radius=1.0, color=(0,0,0), id="b_quad1")
 
     def test_initialization_attributes(self):
         """Test if GravitySimulation initializes attributes correctly."""
@@ -114,7 +114,7 @@ class TestGravitySimulation(unittest.TestCase):
 
     def test_update_no_force_single_body_moving(self):
         """Test update with a single moving body (G will apply no force, or no other bodies)."""
-        body = CelestialBody(mass=10.0, position=Vector2D(0.0,0.0), velocity=Vector2D(1.0,2.0), radius=1.0, color=(0,0,0))
+        body = CelestialBody(mass=10.0, position=Vector2D(0.0,0.0), velocity=Vector2D(1.0,2.0), radius=1.0, color=(0,0,0), id="single_mover")
         self.simulation.add_body(body)
 
         # Store G and set to 0 for this test, or ensure only one body is present

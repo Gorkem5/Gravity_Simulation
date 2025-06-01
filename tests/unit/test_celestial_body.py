@@ -1,6 +1,6 @@
 import unittest
-from src.domain.celestial_body import CelestialBody
-from src.domain.vector2d import Vector2D
+from src.api.domain.celestial_body import CelestialBody # Updated import path
+from src.api.domain.vector2d import Vector2D # Updated import path
 
 class TestCelestialBody(unittest.TestCase):
     """Test suite for the CelestialBody class."""
@@ -12,13 +12,15 @@ class TestCelestialBody(unittest.TestCase):
         self.default_vel = Vector2D(0.0, 0.0) # Use floats
         self.default_radius = 5.0
         self.default_color = (255, 255, 255)
+        self.default_id = "test_body_1"
 
         self.body = CelestialBody(
             mass=self.default_mass,
             position=self.default_pos,
             velocity=self.default_vel,
             radius=self.default_radius,
-            color=self.default_color
+            color=self.default_color,
+            id=self.default_id
         )
 
     def test_initialization(self):
@@ -30,6 +32,7 @@ class TestCelestialBody(unittest.TestCase):
         self.assertEqual(self.body.velocity.y, self.default_vel.y)
         self.assertEqual(self.body.radius, self.default_radius)
         self.assertEqual(self.body.color, self.default_color)
+        self.assertEqual(self.body.id, self.default_id)
 
     def test_update_position_zero_velocity(self):
         """Test position update with zero velocity."""
@@ -131,8 +134,7 @@ class TestCelestialBody(unittest.TestCase):
 
     def test_repr_representation(self):
         """Test the __repr__ representation."""
-        # Example: CelestialBody(mass=100.0, position=Vector2D(0.0, 0.0), velocity=Vector2D(0.0, 0.0), radius=5.0, color=(255, 255, 255))
-        expected_repr = "CelestialBody(mass=100.0, position=Vector2D(0.0, 0.0), velocity=Vector2D(0.0, 0.0), radius=5.0, color=(255, 255, 255))"
+        expected_repr = f"CelestialBody(id={self.body.id!r}, mass={self.body.mass!r}, position={self.body.position!r}, velocity={self.body.velocity!r}, radius={self.body.radius!r}, color={self.body.color!r}, trail_len={len(self.body.trail)})"
         self.assertEqual(repr(self.body), expected_repr)
 
 

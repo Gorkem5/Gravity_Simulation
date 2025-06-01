@@ -1,10 +1,10 @@
-from src.domain.vector2d import Vector2D
+from .vector2d import Vector2D
 
 class CelestialBody:
     """
     Represents a celestial body with physical properties and movement capabilities.
     """
-    def __init__(self, mass: float, position: Vector2D, velocity: Vector2D, radius: float, color: tuple):
+    def __init__(self, mass: float, position: Vector2D, velocity: Vector2D, radius: float, color: tuple, id: str):
         """
         Initializes a CelestialBody object.
 
@@ -14,7 +14,14 @@ class CelestialBody:
             velocity: The initial velocity of the celestial body (a Vector2D object).
             radius: The radius of the celestial body.
             color: The color of the celestial body (e.g., an RGB tuple).
+            id: A unique identifier for the celestial body.
         """
+        if mass <= 0:
+            raise ValueError("Mass must be positive.")
+        if radius <= 0:
+            raise ValueError("Radius must be positive.")
+
+        self.id: str = id
         self.mass: float = mass
         self.position: Vector2D = position
         self.velocity: Vector2D = velocity
@@ -71,6 +78,6 @@ class CelestialBody:
         Returns:
             A string representation of the celestial body.
         """
-        return (f"CelestialBody(mass={self.mass!r}, position={self.position!r}, "
+        return (f"CelestialBody(id={self.id!r}, mass={self.mass!r}, position={self.position!r}, "
                 f"velocity={self.velocity!r}, radius={self.radius!r}, color={self.color!r}, "
                 f"trail_len={len(self.trail)})")

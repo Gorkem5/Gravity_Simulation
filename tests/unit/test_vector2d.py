@@ -1,6 +1,6 @@
 import unittest
 import math
-from src.domain.vector2d import Vector2D
+from src.api.domain.vector2d import Vector2D # Updated import path
 
 class TestVector2D(unittest.TestCase):
     """Test suite for the Vector2D class."""
